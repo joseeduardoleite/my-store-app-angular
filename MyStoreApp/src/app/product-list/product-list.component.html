@@ -1,8 +1,10 @@
-<h2>Products</h2>
+<h2><strong>Products</strong></h2>
 
 <div *ngFor="let product of products">
     <h3>
-        <a [title]="product.name + ' details'">
+        <a 
+        [title]="product.name + ' details'"
+        [routerLink]="['/products', product.id]">
             {{product.name}}
         </a>
     </h3>
@@ -10,6 +12,14 @@
     <p *ngIf="product.description">
         <strong>Description:</strong> {{product.description}}
     </p>
+    <p>
+        <strong>Price:</strong> R$ {{product.price.toFixed(2)}}
+    </p>
 
     <button (click)="share()">Share</button>
+
+    <app-product-alerts 
+    [product]="product"
+    (notify)="onNotify()">
+    </app-product-alerts>
 </div>
